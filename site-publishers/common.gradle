@@ -9,4 +9,4 @@ ext.full_name = name_template
         .replaceAll("_uppercase_loader", loader.toUpperCase())
         .replaceAll("_uppercase_loader", loader.toUpperCase())
         .replaceAll("_capitalized_loader", loader.capitalize())
-        .replaceAll("_version", project.name.toUpperCase())
+        .replaceAll("_version", version)
