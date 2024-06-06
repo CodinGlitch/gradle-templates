@@ -2,14 +2,16 @@ modrinth {
     token = modrinth_token
     projectId = modrinth_id
     versionNumber = "${version}"
-    versionName = "[FABRIC] ${full_mod_name} ${version}"
+    versionName = "[${project.name.toUpperCase()}] ${full_mod_name} ${version}"
     uploadFile = remapJar
     additionalFiles = [sourcesJar, javadocJar]
     gameVersions = supported_versions.split(",").toList()
-    loaders = ['fabric']
+    loaders = [project.name]
     changelog = file("${project.rootDir}/.changelog").text
     dependencies {
-        required.project "fabric-api"
+        if (project.name == 'fabric')
+            required.project "fabric-api"
+
         for (final def id in requiredDependencies.split(",") ) {
             required.project id
         }
@@ -29,7 +31,9 @@ curseforge {
         changelog = file("${project.rootDir}/.changelog")
         releaseType = 'release'
         relations {
-            requiredDependency 'fabric-api'
+            if (project.name == 'fabric')
+                requiredDependency "fabric-api"
+
             for (final def id in requiredDependencies.split(",") ) {
                 requiredDependency id
             }
@@ -38,13 +42,13 @@ curseforge {
             }
         }
 
-        addGameVersion "Fabric"
+        addGameVersion project.name.capitalize()
         for (final def ver in supported_versions.split(",") ) {
             addGameVersion ver
         }
 
         mainArtifact(remapJar) {
-            displayName = "[FABRIC] ${full_mod_name} ${version}"
+            displayName = "[${project.name.toUpperCase()}] ${full_mod_name} ${version}"
         }
         addArtifact sourcesJar
         addArtifact javadocJar
