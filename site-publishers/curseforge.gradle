@@ -29,7 +29,7 @@ curseforge {
         }
 
         mainArtifact(tasks.getByName(loader == 'fabric' ? 'remapJar' : 'jar')) {
-            displayName = "[${project.name.toUpperCase()}] ${full_mod_name} ${version}"
+            displayName = full_name
         }
         addArtifact sourcesJar
         addArtifact javadocJar
