@@ -3,7 +3,7 @@ modrinth {
     projectId = modrinth_id
     versionNumber = "${version}"
     versionName = "[${project.name.toUpperCase()}] ${full_mod_name} ${version}"
-    uploadFile = remapJar
+    uploadFile = project.name == 'fabric' ? remapJar : jar
     additionalFiles = [sourcesJar, javadocJar]
     gameVersions = supported_versions.split(",").toList()
     loaders = [project.name]
@@ -47,7 +47,7 @@ curseforge {
             addGameVersion ver
         }
 
-        mainArtifact(remapJar) {
+        mainArtifact(project.name == 'fabric' ? remapJar : jar) {
             displayName = "[${project.name.toUpperCase()}] ${full_mod_name} ${version}"
         }
         addArtifact sourcesJar
