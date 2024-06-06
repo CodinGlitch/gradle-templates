@@ -1,4 +1,4 @@
-apply from 'https://raw.githubusercontent.com/CodinGlitch/gradle-templates/main/site-publishers/common.gradle'
+apply from: 'https://raw.githubusercontent.com/CodinGlitch/gradle-templates/main/site-publishers/common.gradle'
 
 modrinth {
     token = project.hasProperty('modrinth_token') ? project.property('modrinth_token') : System.getenv("modrinth_token")

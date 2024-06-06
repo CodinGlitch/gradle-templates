@@ -1,4 +1,4 @@
-apply from 'https://raw.githubusercontent.com/CodinGlitch/gradle-templates/main/site-publishers/common.gradle'
+apply from: 'https://raw.githubusercontent.com/CodinGlitch/gradle-templates/main/site-publishers/common.gradle'
 
 curseforge {
     apiKey = project.hasProperty('curseforge_token') ? project.property('curseforge_token') : System.getenv("curseforge_token")
