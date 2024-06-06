@@ -53,6 +53,6 @@ For the name template, several values can be used for substitution:
 | `_uppercase_loader`   | The current loader in lowercase, i.e. `fabric`                      |                                                                       |
 | `_capitalized_loader` | The current loader capitalized, i.e. `Fabric`                       |                                                                       |
 | `_version`            | Your version number as provided by the properties, i.e. `1.0.0`     |                                                                       |
-| `_minecraft_version`  | Your minecraft version as provided by the properties, i.e. `1.20.2` | Requires that you have `minecraft_version` defined in the properties. |
+| `_minecraft_ver`      | Your minecraft version as provided by the properties, i.e. `1.20.2` | Requires that you have `minecraft_version` defined in the properties. |
 \
 You can add a file to your root project folder named `changelog.md`, which will be pulled and used for the changelog of the published file.

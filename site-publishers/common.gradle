@@ -24,7 +24,7 @@ var name = name_template
         .replaceAll("_version", version)
 
 if (project.hasProperty("minecraft_version")) {
-    name = name.replaceAll("_minecraft_version", project.property("minecraft_version"))
+    name = name.replaceAll("_minecraft_ver", project.property("minecraft_version"))
 }
 
 ext.full_name = name
