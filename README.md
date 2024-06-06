@@ -15,6 +15,9 @@ You will need to provide a curseforge/modrinth API token as an environment varia
 \
 You will also need to provide new properties in your `gradle.properties` file, as follows:
 ```properties
+# You probably already have this property
+version=[mod version]
+
 # required, sample below
 # Will show as [FABRIC] My Mod Name 1.0.0
 name_template=[$uppercase_loader] My Mod Name $version
