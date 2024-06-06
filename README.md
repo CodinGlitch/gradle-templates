@@ -9,6 +9,10 @@ apply from: 'https://raw.githubusercontent.com/CodinGlitch/gradle-templates/main
 ```
 \
 \
+You will need to provide a curseforge/modrinth API token as an environment variable or property **outside of your project**.
+#### MAKE SURE THIS IS STORED SAFELY!
+\
+\
 You will also need to provide new properties in your `gradle.properties` file, as follows:
 ```properties
 # required, sample below
@@ -46,3 +50,5 @@ For the name template, several values can be used for substitution:
 | `$uppercase_loader`   | The current loader in lowercase, i.e. `fabric`                  |
 | `$capitalized_loader` | The current loader capitalized, i.e. `Fabric`                   |
 | `$version`            | Your version number as provided by the properties, i.e. `1.0.0` |
+\
+You can add a file to your root project folder named `changelog.md`, which will be pulled and used for the changelog of the published file.
