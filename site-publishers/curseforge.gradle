@@ -1,12 +1,18 @@
+apply from 'https://raw.githubusercontent.com/CodinGlitch/gradle-templates/main/site-publishers/common.gradle'
+
 curseforge {
-    apiKey = curseforge_token
+    apiKey = project.hasProperty('curseforge_token') ? project.property('curseforge_token') : System.getenv("curseforge_token")
     project {
         id = curseforge_id
+
         changelogType = "markdown"
-        changelog = file("${project.rootDir}/.changelog")
-        releaseType = 'release'
+        File changelogFile = file("${project.rootDir}/changelog.md")
+        if (changelogFile.exists())
+            changelog = changelogFile.text
+
+        releaseType = release_type
         relations {
-            if (project.name == 'fabric')
+            if (loader == 'fabric')
                 requiredDependency "fabric-api"
 
             for (final def id in requiredDependencies.split(",") ) {
@@ -17,12 +23,12 @@ curseforge {
             }
         }
 
-        addGameVersion project.name.capitalize()
+        addGameVersion loader.capitalize()
         for (final def ver in supported_versions.split(",") ) {
             addGameVersion ver
         }
 
-        mainArtifact(tasks.getByName(project.name == 'fabric' ? 'remapJar' : 'jar')) {
+        mainArtifact(tasks.getByName(loader == 'fabric' ? 'remapJar' : 'jar')) {
             displayName = "[${project.name.toUpperCase()}] ${full_mod_name} ${version}"
         }
         addArtifact sourcesJar

@@ -1,0 +1,30 @@
+apply from 'https://raw.githubusercontent.com/CodinGlitch/gradle-templates/main/site-publishers/common.gradle'
+
+modrinth {
+    token = project.hasProperty('modrinth_token') ? project.property('modrinth_token') : System.getenv("modrinth_token")
+    projectId = modrinth_id
+    versionNumber = "${version}"
+    versionName = full_name
+    uploadFile = tasks.getByName(loader == 'fabric' ? 'remapJar' : 'jar')
+    additionalFiles = [sourcesJar, javadocJar]
+    gameVersions = supported_versions.split(",").toList()
+    loaders = [loader]
+
+    File changelogFile = file("${project.rootDir}/changelog.md")
+    if (changelogFile.exists())
+        changelog = changelogFile.text
+
+    dependencies {
+        if (loader == 'fabric')
+            required.project "fabric-api"
+
+        for (final def id in requiredDependencies.split(",") ) {
+            required.project id
+        }
+        for (final def id in optionalDependencies.split(",") ) {
+            optional.project id
+        }
+    }
+
+    debugMode = debug_mode.toBoolean()
+}
