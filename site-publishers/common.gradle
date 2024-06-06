@@ -6,7 +6,7 @@ if (!project.hasProperty('debug_mode'))
     ext.debug_mode = false
 
 ext.full_name = name_template
-full_name.replaceAll("\$uppercase_loader", loader.toUpperCase())
-full_name.replaceAll("\$lowercase_loader", loader.toLowerCase())
-full_name.replaceAll("\$capitalized_loader", loader.capitalize())
-full_name.replaceAll("\$version", project.name.toUpperCase())
+ext.full_name = full_name.replaceAll("\$uppercase_loader", loader.toUpperCase())
+ext.full_name = full_name.replaceAll("\$lowercase_loader", loader.toLowerCase())
+ext.full_name = full_name.replaceAll("\$capitalized_loader", loader.capitalize())
+ext.full_name = full_name.replaceAll("\$version", project.name.toUpperCase())
