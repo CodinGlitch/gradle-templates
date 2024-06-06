@@ -17,8 +17,14 @@ if (!project.hasProperty('release_type'))
 if (!project.hasProperty('debug_mode'))
     ext.debug_mode = false
 
-ext.full_name = name_template
+var name = name_template
         .replaceAll("_uppercase_loader", loader.toUpperCase())
         .replaceAll("_lowercase_loader", loader.toLowerCase())
         .replaceAll("_capitalized_loader", loader)
         .replaceAll("_version", version)
+
+if (project.hasProperty("minecraft_version")) {
+    name = name.replaceAll("_minecraft_version", project.property("minecraft_version"))
+}
+
+ext.full_name = name
