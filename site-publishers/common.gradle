@@ -2,10 +2,13 @@ if (!project.hasProperty('loader')) {
     switch (project.name.toLowerCase()) {
         case "fabric":
             ext.loader = "Fabric"
+            break
         case "forge":
             ext.loader = "Forge"
+            break
         case "neoforge":
             ext.loader = "NeoForge"
+            break
     }
 }
 
