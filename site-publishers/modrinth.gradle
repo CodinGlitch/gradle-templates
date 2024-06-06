@@ -5,17 +5,17 @@ modrinth {
     projectId = modrinth_id
     versionNumber = "${version}"
     versionName = full_name
-    uploadFile = tasks.getByName(loader == 'fabric' ? 'remapJar' : 'jar')
+    uploadFile = tasks.getByName(loader == 'Fabric' ? 'remapJar' : 'jar')
     additionalFiles = [sourcesJar, javadocJar]
     gameVersions = supported_versions.split(",").toList()
-    loaders = [loader]
+    loaders = [loader.toLowerCase()]
 
     File changelogFile = file("${project.rootDir}/changelog.md")
     if (changelogFile.exists())
         changelog = changelogFile.text
 
     dependencies {
-        if (loader == 'fabric')
+        if (loader == 'Fabric')
             required.project "fabric-api"
 
         for (final def id in requiredDependencies.split(",") ) {

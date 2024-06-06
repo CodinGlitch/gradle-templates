@@ -12,7 +12,7 @@ curseforge {
 
         releaseType = release_type
         relations {
-            if (loader == 'fabric')
+            if (loader == 'Fabric')
                 requiredDependency "fabric-api"
 
             for (final def id in requiredDependencies.split(",") ) {
@@ -23,12 +23,12 @@ curseforge {
             }
         }
 
-        addGameVersion loader.capitalize()
+        addGameVersion loader
         for (final def ver in supported_versions.split(",") ) {
             addGameVersion ver
         }
 
-        mainArtifact(tasks.getByName(loader == 'fabric' ? 'remapJar' : 'jar')) {
+        mainArtifact(tasks.getByName(loader == 'Fabric' ? 'remapJar' : 'jar')) {
             displayName = full_name
         }
         addArtifact sourcesJar

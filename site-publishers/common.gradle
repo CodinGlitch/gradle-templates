@@ -1,5 +1,14 @@
-if (!project.hasProperty('loader'))
-    ext.loader = project.name
+if (!project.hasProperty('loader')) {
+    switch (project.name.toLowerCase()) {
+        case "fabric":
+            ext.loader = "Fabric"
+        case "forge":
+            ext.loader = "Forge"
+        case "neoforge":
+            ext.loader = "NeoForge"
+    }
+}
+
 if (!project.hasProperty('release_type'))
     ext.release_type = 'release'
 if (!project.hasProperty('debug_mode'))
@@ -7,6 +16,6 @@ if (!project.hasProperty('debug_mode'))
 
 ext.full_name = name_template
         .replaceAll("_uppercase_loader", loader.toUpperCase())
-        .replaceAll("_uppercase_loader", loader.toUpperCase())
-        .replaceAll("_capitalized_loader", loader.capitalize())
+        .replaceAll("_lowercase_loader", loader.toLowerCase())
+        .replaceAll("_capitalized_loader", loader)
         .replaceAll("_version", version)
