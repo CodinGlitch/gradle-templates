@@ -15,8 +15,8 @@ curseforge {
             if (loader == 'Fabric')
                 requiredDependency "fabric-api"
 
-            requiredDependencies.split(",").each { key, dep -> if (!dep?.trim()) requiredDependency dep }
-            optionalDependencies.split(",").each { key, dep -> if (!dep?.trim()) optionalDependency dep }
+            if (!requiredDependencies.isEmpty()) requiredDependencies.split(",").each { key, dep -> requiredDependency dep }
+            if (!optionalDependencies.isEmpty()) optionalDependencies.split(",").each { key, dep -> optionalDependency dep }
         }
 
         addGameVersion loader
