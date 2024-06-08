@@ -20,7 +20,9 @@ curseforge {
         }
 
         addGameVersion loader
-        supported_versions.split(",").each { key, ver -> addGameVersion ver }
+        for (final def ver in supported_versions.split(",") ) {
+            addGameVersion ver
+        }
 
         mainArtifact(tasks.getByName(loader == 'Fabric' ? 'remapJar' : 'jar')) {
             displayName = full_name
