@@ -11,12 +11,14 @@ curseforge {
             changelog = changelogFile.text
 
         releaseType = release_type
-        relations {
-            if (loader == 'Fabric')
-                requiredDependency "fabric-api"
+        if (loader == 'Fabric' || !requiredDependencies.isEmpty() || !optionalDependencies.isEmpty()) {
+            relations {
+                if (loader == 'Fabric')
+                    requiredDependency "fabric-api"
 
-            if (!requiredDependencies.isEmpty()) requiredDependencies.split(",").each { key, dep -> requiredDependency dep }
-            if (!optionalDependencies.isEmpty()) optionalDependencies.split(",").each { key, dep -> optionalDependency dep }
+                if (!requiredDependencies.isEmpty()) requiredDependencies.split(",").each { key, dep -> requiredDependency dep }
+                if (!optionalDependencies.isEmpty()) optionalDependencies.split(",").each { key, dep -> optionalDependency dep }
+            }
         }
 
         addGameVersion loader
