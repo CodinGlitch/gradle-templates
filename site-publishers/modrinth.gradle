@@ -18,12 +18,8 @@ modrinth {
         if (loader == 'Fabric')
             required.project "fabric-api"
 
-        for (final def id in requiredDependencies.split(",") ) {
-            required.project id
-        }
-        for (final def id in optionalDependencies.split(",") ) {
-            optional.project id
-        }
+        requiredDependencies.split(",").each { key, dep -> requiredDependency dep }
+        optionalDependencies.split(",").each { key, dep -> optionalDependency dep }
     }
 
     debugMode = debug_mode.toBoolean()

@@ -15,18 +15,12 @@ curseforge {
             if (loader == 'Fabric')
                 requiredDependency "fabric-api"
 
-            for (final def id in requiredDependencies.split(",") ) {
-                requiredDependency id
-            }
-            for (final def id in optionalDependencies.split(",") ) {
-                optionalDependency id
-            }
+            requiredDependencies.split(",").each { key, dep -> requiredDependency dep }
+            optionalDependencies.split(",").each { key, dep -> optionalDependency dep }
         }
 
         addGameVersion loader
-        for (final def ver in supported_versions.split(",") ) {
-            addGameVersion ver
-        }
+        supported_versions.split(",").each { key, ver -> addGameVersion ver }
 
         mainArtifact(tasks.getByName(loader == 'Fabric' ? 'remapJar' : 'jar')) {
             displayName = full_name
