@@ -34,8 +34,8 @@ publishing {
             url = 'https://maven.codinglitch.com/repository/releases/'
 
             credentials {
-                username = project.property('repository_username')
-                password = project.property('repository_password')
+                if (project.hasProperty('repository_username')) username = project.property('repository_username')
+                if (project.hasProperty('repository_password')) password = project.property('repository_password')
             }
         }
     }
