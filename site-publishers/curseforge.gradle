@@ -1,39 +1,45 @@
 apply from: 'https://raw.githubusercontent.com/CodinGlitch/gradle-templates/main/site-publishers/common.gradle'
 
-curseforge {
-    apiKey = project.hasProperty('curseforge_token') ? project.property('curseforge_token') : System.getenv("curseforge_token")
-    project {
-        id = curseforge_id
+var token = project.hasProperty('curseforge_token') ? project.property('curseforge_token') : System.getenv("curseforge_token")
 
-        changelogType = "markdown"
-        File changelogFile = file("${project.rootDir}/changelog.md")
-        if (changelogFile.exists())
-            changelog = changelogFile.text
+if (token == null) {
+    System.out.println("No token found for curseforge, publishing task will not be loaded properly")
+} else {
+    curseforge {
+        apiKey = token
+        project {
+            id = curseforge_id
 
-        releaseType = release_type
-        if (loader == 'Fabric' || !requiredDependencies.isEmpty() || !optionalDependencies.isEmpty()) {
-            relations {
-                if (loader == 'Fabric')
-                    requiredDependency "fabric-api"
+            changelogType = "markdown"
+            File changelogFile = file("${project.rootDir}/changelog.md")
+            if (changelogFile.exists())
+                changelog = changelogFile.text
 
-                if (!requiredDependencies.isEmpty()) requiredDependencies.split(",").each { dep -> requiredDependency dep }
-                if (!optionalDependencies.isEmpty()) optionalDependencies.split(",").each { dep -> optionalDependency dep }
+            releaseType = release_type
+            if (loader == 'Fabric' || !requiredDependencies.isEmpty() || !optionalDependencies.isEmpty()) {
+                relations {
+                    if (loader == 'Fabric')
+                        requiredDependency "fabric-api"
+
+                    if (!requiredDependencies.isEmpty()) requiredDependencies.split(",").each { dep -> requiredDependency dep }
+                    if (!optionalDependencies.isEmpty()) optionalDependencies.split(",").each { dep -> optionalDependency dep }
+                }
             }
+
+            addGameVersion loader
+            for (final def ver in supported_versions.split(",") ) {
+                addGameVersion ver
+            }
+
+            mainArtifact(tasks.getByName(loader == 'Fabric' ? 'remapJar' : 'jar')) {
+                displayName = full_name
+            }
+            addArtifact sourcesJar
+            addArtifact javadocJar
         }
 
-        addGameVersion loader
-        for (final def ver in supported_versions.split(",") ) {
-            addGameVersion ver
+        options {
+            debug = debug_mode.toBoolean()
         }
-
-        mainArtifact(tasks.getByName(loader == 'Fabric' ? 'remapJar' : 'jar')) {
-            displayName = full_name
-        }
-        addArtifact sourcesJar
-        addArtifact javadocJar
-    }
-
-    options {
-        debug = debug_mode.toBoolean()
     }
 }

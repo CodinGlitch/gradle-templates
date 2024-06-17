@@ -1,26 +1,32 @@
 apply from: 'https://raw.githubusercontent.com/CodinGlitch/gradle-templates/main/site-publishers/common.gradle'
 
-modrinth {
-    token = project.hasProperty('modrinth_token') ? project.property('modrinth_token') : System.getenv("modrinth_token")
-    projectId = modrinth_id
-    versionNumber = "${version}"
-    versionName = full_name
-    uploadFile = tasks.getByName(loader == 'Fabric' ? 'remapJar' : 'jar')
-    additionalFiles = [sourcesJar, javadocJar]
-    gameVersions = supported_versions.split(",").toList()
-    loaders = [loader.toLowerCase()]
+var token = project.hasProperty('modrinth_token') ? project.property('modrinth_token') : System.getenv("modrinth_token")
 
-    File changelogFile = file("${project.rootDir}/changelog.md")
-    if (changelogFile.exists())
-        changelog = changelogFile.text
+if (token == null) {
+    System.out.println("No token found for modrinth, publishing task will not be loaded properly")
+} else {
+    modrinth {
+        token = token
+        projectId = modrinth_id
+        versionNumber = "${version}"
+        versionName = full_name
+        uploadFile = tasks.getByName(loader == 'Fabric' ? 'remapJar' : 'jar')
+        additionalFiles = [sourcesJar, javadocJar]
+        gameVersions = supported_versions.split(",").toList()
+        loaders = [loader.toLowerCase()]
 
-    dependencies {
-        if (loader == 'Fabric')
-            required.project "fabric-api"
+        File changelogFile = file("${project.rootDir}/changelog.md")
+        if (changelogFile.exists())
+            changelog = changelogFile.text
 
-        if (!requiredDependencies.isEmpty()) requiredDependencies.split(",").each { dep -> required.project dep }
-        if (!optionalDependencies.isEmpty()) optionalDependencies.split(",").each { dep -> optional.project dep }
+        dependencies {
+            if (loader == 'Fabric')
+                required.project "fabric-api"
+
+            if (!requiredDependencies.isEmpty()) requiredDependencies.split(",").each { dep -> required.project dep }
+            if (!optionalDependencies.isEmpty()) optionalDependencies.split(",").each { dep -> optional.project dep }
+        }
+
+        debugMode = debug_mode.toBoolean()
     }
-
-    debugMode = debug_mode.toBoolean()
 }
