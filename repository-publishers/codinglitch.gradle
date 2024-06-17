@@ -1,0 +1,42 @@
+publishing {
+    publications {
+        maven(MavenPublication) {
+            artifactId = "${mod_id}-${project.name.toLowerCase()}"
+            from components.java
+
+            pom {
+                name = "$mod_name"
+                description = "$description"
+                url = 'https://codinglitch.com/'
+                licenses {
+                    switch (project.property('license')) {
+                        case "GNU GPLv3":
+                            license {
+                                name = 'The GNU General Public License, Version 3.0'
+                                url = 'https://www.gnu.org/licenses/gpl-3.0.en.html'
+                            }
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'codinglitch'
+                        name = 'CodinGlitch'
+                        email = 'developer@codinglitch.com'
+                    }
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name = 'codinglitch'
+            url = 'https://maven.codinglitch.com/repository/releases/'
+
+            credentials {
+                username = project.property('repository_username')
+                password = project.property('repository_password')
+            }
+        }
+    }
+}
