@@ -1,3 +1,7 @@
+components.java.withVariantsFromConfiguration(configurations.runtimeElements) {
+    skip()
+}
+
 publishing {
     publications {
         maven(MavenPublication) {
