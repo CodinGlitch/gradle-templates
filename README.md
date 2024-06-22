@@ -10,7 +10,8 @@ apply from: 'https://raw.githubusercontent.com/CodinGlitch/gradle-templates/main
 \
 \
 You will need to provide a curseforge/modrinth API token as an environment variable or property **outside of your project**.
-#### MAKE SURE THIS IS STORED SAFELY!
+
+**MAKE SURE THIS IS STORED SAFELY!**
 \
 \
 You will also need to provide new properties in your `gradle.properties` file, as follows:
@@ -20,7 +21,7 @@ version=[mod version]
 
 # required, sample below
 # Will show as [FABRIC] My Mod Name 1.0.0
-name_template=[$uppercase_loader] My Mod Name $version
+name_template=[_uppercase_loader] My Mod Name _version
 
 # optional
 # If using a multi-loader project, omit this property and it will use the subproject name.
@@ -43,6 +44,7 @@ release_type=[release, beta, or alpha]
 # optional, default false
 debug_mode=[if true, will not publish the file and print to console]
 ```
+You may further customize the properties per-subproject by simply adding a `gradle.properties` file into their module.
 \
 \
 For the name template, several values can be used for substitution:
