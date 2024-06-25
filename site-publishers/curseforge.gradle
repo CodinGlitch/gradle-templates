@@ -1,12 +1,12 @@
 apply from: 'https://raw.githubusercontent.com/CodinGlitch/gradle-templates/main/site-publishers/common.gradle'
 
-var token = project.hasProperty('curseforge_token') ? project.property('curseforge_token') : System.getenv("curseforge_token")
+var curseForgeToken = project.hasProperty('curseforge_token') ? project.property('curseforge_token') : System.getenv("curseforge_token")
 
-if (token == null) {
+if (curseForgeToken == null) {
     System.out.println("No token found for curseforge, publishing task will not be loaded properly")
 } else {
     curseforge {
-        apiKey = token
+        apiKey = curseForgeToken
         project {
             id = curseforge_id
 

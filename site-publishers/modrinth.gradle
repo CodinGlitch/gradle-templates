@@ -1,12 +1,12 @@
 apply from: 'https://raw.githubusercontent.com/CodinGlitch/gradle-templates/main/site-publishers/common.gradle'
 
-var token = project.hasProperty('modrinth_token') ? project.property('modrinth_token') : System.getenv("modrinth_token")
+var modrinthToken = project.hasProperty('modrinth_token') ? project.property('modrinth_token') : System.getenv("modrinth_token")
 
-if (token == null) {
+if (modrinthToken == null) {
     System.out.println("No token found for modrinth, publishing task will not be loaded properly")
 } else {
     modrinth {
-        token = token
+        token = modrinthToken
         projectId = modrinth_id
         versionNumber = "${version}"
         versionName = full_name
