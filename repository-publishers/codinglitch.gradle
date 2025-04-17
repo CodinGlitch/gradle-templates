@@ -4,7 +4,7 @@ components.java.withVariantsFromConfiguration(configurations.runtimeElements) {
 
 publishing {
     publications {
-        maven(MavenPublication) {
+        register('mavenJava', MavenPublication) {
             artifactId = base.archivesName.get()
             from components.java
 
