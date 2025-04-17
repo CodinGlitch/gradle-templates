@@ -5,7 +5,7 @@ components.java.withVariantsFromConfiguration(configurations.runtimeElements) {
 publishing {
     publications {
         maven(MavenPublication) {
-            artifactId = "${mod_id}-${project.name.toLowerCase()}"
+            artifactId = base.archivesName.get()
             from components.java
 
             pom {
