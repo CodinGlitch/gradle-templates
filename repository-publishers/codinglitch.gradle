@@ -2,11 +2,12 @@ publishing {
     publications {
         register('mavenJava', MavenPublication) {
             artifactId = base.archivesName.get()
-            from components.java
+            artifact jar
+            artifact sourcesJar
 
             pom {
                 name = "$mod_name"
-                description = "$description"
+                description = $description.toString()
                 url = 'https://codinglitch.com/'
                 licenses {
                     switch (project.property('license')) {
