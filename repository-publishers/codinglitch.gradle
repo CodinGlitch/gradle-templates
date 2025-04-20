@@ -1,3 +1,7 @@
+tasks.withType(GenerateModuleMetadata) {
+    enabled = false // tired of dealing with this shit
+}
+
 publishing {
     publications {
         register('mavenJava', MavenPublication) {
