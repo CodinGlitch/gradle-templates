@@ -6,8 +6,7 @@ publishing {
     publications {
         register('mavenJava', MavenPublication) {
             artifactId = base.archivesName.get()
-            artifact jar
-            artifact sourcesJar
+            from components.java
 
             pom {
                 name = "$mod_name"
