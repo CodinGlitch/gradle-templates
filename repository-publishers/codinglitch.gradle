@@ -5,31 +5,25 @@ publishing {
             artifact jar
             artifact sourcesJar
 
-            pom.withXml {
-                asNode()
-                    .appendNode("name", "$mod_name")
-                    .appendNode("description", description.toString())
-                    .appendNode("url", 'https://codinglitch.com/')
-                    .appendNode("licenses", {
-                        switch (project.property('license')) {
-                            case "GNU GPLv3":
-                                license {
-                                    name = 'The GNU General Public License, Version 3.0'
-                                    url = 'https://www.gnu.org/licenses/gpl-3.0.en.html'
-                                }
-                        }
-                    })
-                    .appendNode("developers", {
-                        developer {
-                            id = 'codinglitch'
-                            name = 'CodinGlitch'
-                            email = 'developer@codinglitch.com'
-                        }
-                    })
-                .dependencies.'*'.findAll() {
-                    exclude_groups.contains(it.groupId.text())
-                }.each() {
-                    it.parent().remove(it)
+            pom {
+                name = "$mod_name"
+                description = $description.toString()
+                url = 'https://codinglitch.com/'
+                licenses {
+                    switch (project.property('license')) {
+                        case "GNU GPLv3":
+                            license {
+                                name = 'The GNU General Public License, Version 3.0'
+                                url = 'https://www.gnu.org/licenses/gpl-3.0.en.html'
+                            }
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'codinglitch'
+                        name = 'CodinGlitch'
+                        email = 'developer@codinglitch.com'
+                    }
                 }
             }
         }
