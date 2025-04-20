@@ -9,8 +9,8 @@ publishing {
             from components.java
 
             pom {
-                name = "$mod_name"
-                description = $description.toString()
+                name = mod_name.toString()
+                description = description.toString()
                 url = 'https://codinglitch.com/'
                 licenses {
                     switch (project.property('license')) {
