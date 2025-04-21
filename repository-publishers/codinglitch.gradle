@@ -1,11 +1,3 @@
-tasks.withType(GenerateModuleMetadata) {
-    enabled = false // tired of dealing with this shit
-}
-
-components.java.withVariantsFromConfiguration(configurations.runtimeElements) {
-    skip()
-}
-
 publishing {
     publications {
         register('mavenJava', MavenPublication) {
