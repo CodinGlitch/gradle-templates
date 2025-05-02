@@ -31,7 +31,7 @@ if (curseForgeToken == null) {
                 addGameVersion ver
             }
 
-            mainArtifact(tasks.getByName(loader == 'Fabric' ? 'remapJar' : 'jar')) {
+            mainArtifact(tasks.getByName(loader == 'Fabric' ? 'remapJar' : (loader == "Forge" ? "jarJar" : "jar"))) {
                 displayName = full_name
             }
             addArtifact sourcesJar
