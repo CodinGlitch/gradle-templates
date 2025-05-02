@@ -10,6 +10,7 @@ if (modrinthToken == null) {
         projectId = modrinth_id
         versionNumber = "${version}"
         versionName = full_name
+        versionType = release_type
         uploadFile = tasks.getByName(loader == 'Fabric' ? 'remapJar' : 'jar')
         additionalFiles = [sourcesJar, javadocJar]
         gameVersions = supported_versions.split(",").toList()
