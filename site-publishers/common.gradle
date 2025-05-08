@@ -28,3 +28,12 @@ if (project.hasProperty("minecraft_version")) {
 }
 
 ext.full_name = name
+ext.task_name = "jar"
+
+if (loader == "Fabric") {
+    ext.task_name = "remapJar"
+} else if (loader == "Forge") {
+    if (configurations.jarJar.dependencies.size() > 0) {
+        ext.task_name = "jarJar"
+    }
+}

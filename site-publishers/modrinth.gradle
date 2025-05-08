@@ -11,7 +11,7 @@ if (modrinthToken == null) {
         versionNumber = "${version}"
         versionName = full_name
         versionType = release_type
-        uploadFile = tasks.getByName(loader == 'Fabric' ? 'remapJar' : (loader == "Forge" ? "jarJar" : "jar"))
+        uploadFile = tasks.getByName(taskName)
         additionalFiles = [sourcesJar, javadocJar]
         gameVersions = supported_versions.split(",").toList()
         loaders = [loader.toLowerCase()]
