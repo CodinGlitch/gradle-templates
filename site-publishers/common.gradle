@@ -26,14 +26,14 @@ var name = name_template
 if (project.hasProperty("minecraft_version")) {
     name = name.replaceAll("_minecraft_ver", project.property("minecraft_version"))
 }
-
 ext.full_name = name
-ext.task_name = "jar"
 
-if (loader == "Fabric") {
-    ext.task_name = "remapJar"
-} else if (loader == "Forge") {
-    if (configurations.jarJar.dependencies.size() > 0) {
-        ext.task_name = "jarJar"
+var taskName = "jar"
+if (ext.loader == "Fabric") {
+    taskName = "remapJar"
+} else if (ext.loader == "Forge") {
+    if (tasks.jarJar.enabled) {
+        taskName = "jarJar"
     }
 }
+ext.task_name = taskName
