@@ -1,0 +1,46 @@
+publishing {
+    publications {
+        register('mavenJava', MavenPublication) {
+            artifactId = base.archivesName.get()
+            from components.java
+
+            pom {
+                name = mod_name.toString()
+                description = description.toString()
+                url = 'https://codinglitch.com/'
+                licenses {
+                    switch (project.property('license')) {
+                        case "GNU GPLv3":
+                            license {
+                                name = 'The GNU General Public License, Version 3.0'
+                                url = 'https://www.gnu.org/licenses/gpl-3.0.en.html'
+                            }
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'codinglitch'
+                        name = 'CodinGlitch'
+                        email = 'developer@codinglitch.com'
+                    }
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name = 'codinglitch'
+            url = 'https://maven.codinglitch.com/releases/'
+
+            credentials {
+                if (project.hasProperty('repository_username')) username = project.property('repository_username')
+                if (project.hasProperty('repository_password')) password = project.property('repository_password')
+            }
+
+            authentication {
+                basic(BasicAuthentication)
+            }
+        }
+    }
+}
